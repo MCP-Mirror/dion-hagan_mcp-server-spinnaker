@@ -13,10 +13,14 @@ export {
   spm_deploy
 } from './commands/pipeline';
 
+// Core functions
+export { initializeSpinnaker } from './functions';
+
 // Types
 export type {
   SpinnakerApplication,
   SpinnakerDeployment,
   SpinnakerPipeline,
-  PipelineParameters
+  PipelineParameters,
+  SpinnakerConfig
 } from './types/spinnaker';

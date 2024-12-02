@@ -31,3 +31,8 @@ export interface SpinnakerPipeline {
 export interface PipelineParameters {
   [key: string]: any;
 }
+
+export interface SpinnakerConfig {
+  apiUrl: string;
+  token: string;
+}
