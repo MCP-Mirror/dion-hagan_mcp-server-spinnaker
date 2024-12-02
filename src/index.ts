@@ -1,20 +1,22 @@
-import { MCPServer } from "@modelcontext/mcp";
-import { spm_deploy } from "./functions";
+// Application commands
+export { listApplications, getApplication } from './commands/application';
 
-const functions = [
-  {
-    name: "spm_deploy",
-    description: "Deploy a Spinnaker pipeline",
-    parameters: { 
-      properties: {
-        app: { type: "string" },
-        pipelineConfigFile: { type: "string" },
-      },
-      required: ["app", "pipelineConfigFile"] 
-    }
-  }
-];
+// Deployment commands
+export { listDeployments } from './commands/deployment';
 
-const server = new MCPServer({functions});
+// Pipeline commands
+export {
+  listPipelines,
+  executePipeline,
+  stopPipeline,
+  watchPipeline,
+  spm_deploy
+} from './commands/pipeline';
 
-server.start();
+// Types
+export type {
+  SpinnakerApplication,
+  SpinnakerDeployment,
+  SpinnakerPipeline,
+  PipelineParameters
+} from './types/spinnaker';
