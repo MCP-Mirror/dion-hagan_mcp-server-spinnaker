@@ -1,3 +1,7 @@
+# ⚠️ WORK IN PROGRESS ⚠️
+
+> **Note**: This project is currently a work in progress and is being used to test Claude AI functionality. It is not intended for production use at this time. Features and documentation may be incomplete or subject to major changes.
+
 # MCP Server Spinnaker
 
 A Model Context Platform (MCP) server implementation for Spinnaker integrations. This server acts as a middleware between MCP clients (like spm-cli) and Spinnaker's API, providing standardized access to Spinnaker's pipeline, application, and deployment management features.
