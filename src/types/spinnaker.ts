@@ -18,14 +18,20 @@ export interface SpinnakerDeployment {
 }
 
 export interface SpinnakerPipeline {
-  id: string;
-  name: string;
-  application: string;
-  status?: string;
+  name: string;           // Pipeline name/ID used for execution
+  application: string;    // Associated application name
+  description?: string;
   stages?: Array<{
     name: string;
-    status: string;
+    type: string;
   }>;
+}
+
+export interface PipelineExecution {
+  execution_id: string;   // The Spinnaker execution ID
+  pipeline_name: string;  // Name of the executed pipeline
+  status: string;        // Current execution status
+  start_time?: string;   // When the execution started
 }
 
 export interface PipelineParameters {
