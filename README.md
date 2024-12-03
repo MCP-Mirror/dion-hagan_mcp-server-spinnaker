@@ -5,9 +5,9 @@ A Model Context Platform (MCP) server implementation for Spinnaker integrations.
 ## Installation
 
 ```bash
-npm install @dion-hagan/mcp-server-spinnaker
+npm install mcp-server-spinnaker
 # or
-yarn add @dion-hagan/mcp-server-spinnaker
+yarn add mcp-server-spinnaker
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ import {
   listApplications, 
   listPipelines, 
   executePipeline 
-} from '@dion-hagan/mcp-server-spinnaker';
+} from 'mcp-server-spinnaker';
 
 // Initialize Spinnaker configuration
 await initializeSpinnaker({
