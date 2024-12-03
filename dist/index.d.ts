@@ -1,3 +1,3 @@
-export { SpinnakerMCPServer } from './server/SpinnakerMCPServer';
-export { GateClient } from './clients/GateClient';
-export * from './types/spinnaker';
+export { SpinnakerMCPServer } from './server/SpinnakerMCPServer.js';
+export { GateClient } from './clients/GateClient.js';
+export * from './types/spinnaker.js';

@@ -1,4 +1,4 @@
-import { Pipeline, PipelineExecution, PipelineStage, PipelineStatus, StageStatus, DeployHistory, DeployStatus, Snapshot, SnapshotStatus } from './spinnaker';
+import { Pipeline, PipelineExecution, PipelineStage, PipelineStatus, StageStatus, DeployHistory, DeployStatus, Snapshot, SnapshotStatus } from './spinnaker.js';
 /**
  * Response from the /mcp/v1/context endpoint containing current Spinnaker state
  */

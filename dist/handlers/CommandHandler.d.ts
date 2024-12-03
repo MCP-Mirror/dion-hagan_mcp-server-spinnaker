@@ -1,5 +1,5 @@
-import { GateClient } from '../clients/GateClient';
-import { CommandRequest, CommandResponse } from '../types/protocol';
+import { GateClient } from '../clients/GateClient.js';
+import { CommandRequest, CommandResponse } from '../types/protocol.js';
 export declare class CommandHandler {
     private gateClient;
     constructor(gateClient: GateClient);

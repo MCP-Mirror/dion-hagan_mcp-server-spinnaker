@@ -1,6 +1,6 @@
-import { ContextManager } from './ContextManager';
-import { CommandHandler } from './CommandHandler';
-import { GateClient } from '../clients/GateClient';
+import { ContextManager } from './ContextManager.js';
+import { CommandHandler } from './CommandHandler.js';
+import { GateClient } from '../clients/GateClient.js';
 export class ModelContextProtocolServer {
     constructor(gateUrl, applications, environments) {
         const gateClient = new GateClient(gateUrl);

@@ -16,13 +16,9 @@ Let's dive into some of the exciting possibilities this integration enables for 
 
 4. **Automated Root Cause Analysis and Recovery**: When issues do occur, AI can rapidly diagnose the problem and even attempt to fix it autonomously. Claude could correlate errors across different parts of the system, identify the most likely root cause, and then take corrective actions like rolling back to a previous version or applying a known patch.
 
-And these are just a few examples! As the Model Context Protocol evolves and more integrations are built, we can expect AI to take on increasingly sophisticated roles in the DevOps world:
+And these are just a few examples! As the Model Context Protocol evolves and more integrations are built, we can expect AI to take on increasingly sophisticated roles in the DevOps world. Across the entire CI/CD pipeline, AI could provide intelligent insights and recommendations, acting as a virtual assistant for product engineers.
 
-- In Buildkite, an AI model could optimize job scheduling based on real-time resource availability and automatically re-run failed jobs with tweaked settings. 
-- For Spinnaker, AI could dynamically adjust traffic splitting for blue/green deployments based on real-user metrics, ensuring a smooth rollout.
-- Across the entire CI/CD pipeline, AI could provide intelligent insights and recommendations, acting as a virtual assistant for DevOps engineers.
-
-By empowering AI to work alongside humans in the CI/CD process, MCP integrations like this Spinnaker server showcase how AI can become a proactive, intelligent partner in DevOps. It's a significant step towards more efficient, reliable, and autonomous software delivery.
+By empowering AI to work alongside humans in the CI/CD process, MCP integrations like this Spinnaker server showcase how AI can become a proactive, intelligent partner in Developer Productivity infrastructure. It's a significant step towards more efficient, reliable, and autonomous software delivery.
 
 ## Installation
 
