@@ -1,6 +1,20 @@
 import WebSocket from 'ws';
 import { Pipeline, PipelineExecution, DeployHistory, Snapshot } from '../types/spinnaker';
 
+export interface Application {
+  name: string;
+  description: string;
+  pipelines: Pipeline[];
+}
+
+export interface Deployment {
+  application: string;
+  environment: string;
+  version: string;
+  status: string;
+  lastUpdated: string;
+}
+
 export class GateClient {
   private ws: WebSocket | null = null;
   private baseUrl: string;
@@ -9,7 +23,58 @@ export class GateClient {
     this.baseUrl = baseUrl;
   }
 
-  // Pipeline Operations
+  // New methods for MCP server
+  async getApplications(applications: string[]): Promise<Application[]> {
+    const appPromises = applications.map(async (appName) => {
+      const pipelines = await this.listPipelines(appName);
+      const response = await fetch(`${this.baseUrl}/applications/${appName}`);
+      const appDetails = await response.json();
+      
+      return {
+        name: appName,
+        description: appDetails.description || '',
+        pipelines
+      };
+    });
+
+    return Promise.all(appPromises);
+  }
+
+  async getDeployments(applications: string[], environments: string[]): Promise<Deployment[]> {
+    const deployments: Deployment[] = [];
+    
+    for (const app of applications) {
+      for (const env of environments) {
+        const lastDeploy = await this.getLastDeploy(env, app);
+        if (lastDeploy) {
+          deployments.push({
+            application: app,
+            environment: env,
+            version: lastDeploy.version,
+            status: lastDeploy.status,
+            lastUpdated: lastDeploy.timestamp
+          });
+        }
+      }
+    }
+
+    return deployments;
+  }
+
+  async getPipelines(application: string): Promise<Pipeline[]> {
+    return this.listPipelines(application);
+  }
+
+  async triggerPipeline(
+    application: string,
+    pipelineId: string,
+    parameters?: Record<string, unknown>
+  ): Promise<{ ref: string }> {
+    const ref = await this.executePipeline(application, pipelineId, parameters);
+    return { ref };
+  }
+
+  // Existing methods
   async listPipelines(application: string): Promise<Pipeline[]> {
     const response = await fetch(`${this.baseUrl}/applications/${application}/pipelines`);
     return response.json();

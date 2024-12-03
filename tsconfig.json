@@ -1,20 +1,22 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "module": "es2020",
+    "module": "nodenext",
     "outDir": "dist",
     "rootDir": "src",
     "sourceMap": true,
     "esModuleInterop": true,
     "strict": true,
     "declaration": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmitOnError": false,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "types": ["node"]
   },
   "include": ["src/**/*"],
   "exclude": [

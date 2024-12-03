@@ -42,6 +42,7 @@
   },
   "homepage": "https://github.com/dion-hagan/mcp-server-spinnaker#readme",
   "dependencies": {
+    "@modelcontextprotocol/sdk": "1.0.1",
     "express": "^4.18.2",
     "ws": "^8.16.0",
     "zod": "^3.22.4"

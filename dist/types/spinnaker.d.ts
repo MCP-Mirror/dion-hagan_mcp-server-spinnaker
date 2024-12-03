@@ -78,6 +78,10 @@ export interface DeployHistory {
     pipeline_execution_id: string;
     /** Current status of the deployment */
     status: DeployStatus;
+    /** Version of the deployment */
+    version: string;
+    /** Timestamp of the deployment */
+    timestamp: string;
 }
 /**
  * Snapshot of application state for deployment
