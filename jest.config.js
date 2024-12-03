@@ -1,6 +1,5 @@
-/** @type {import('ts-jest').JestConfigWithTsJest} */
 export default {
-  preset: 'ts-jest',
+  preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
   extensionsToTreatAsEsm: ['.ts'],
   moduleNameMapper: {
@@ -14,4 +13,9 @@ export default {
       },
     ],
   },
+  setupFiles: ['<rootDir>/src/__tests__/setup.ts'],
+  // Only run .test.ts files
+  testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
+  // Exclude declaration files
+  testPathIgnorePatterns: ['\\.d\\.ts$', 'dist/'],
 };
