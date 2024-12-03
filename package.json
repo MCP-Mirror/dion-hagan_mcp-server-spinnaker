@@ -1,20 +1,51 @@
 {
-  "name": "mcp-server-spinnaker",
+  "name": "@dion-hagan/mcp-server-spinnaker",
   "version": "1.0.0",
-  "description": "MCP server for Spinnaker integrations",
+  "description": "MCP server implementation for Spinnaker integrations",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "node --experimental-specifier-resolution=node dist/index.js",
     "build": "tsc",
     "dev": "yarn build && yarn start",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "prepublishOnly": "yarn clean && yarn build",
+    "prepare": "yarn build"
   },
+  "keywords": [
+    "mcp",
+    "spinnaker",
+    "deployment",
+    "pipeline",
+    "automation"
+  ],
+  "author": "Dion Hagan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dion-hagan/mcp-server-spinnaker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dion-hagan/mcp-server-spinnaker/issues"
+  },
+  "homepage": "https://github.com/dion-hagan/mcp-server-spinnaker#readme",
   "dependencies": {
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
     "typescript": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }
