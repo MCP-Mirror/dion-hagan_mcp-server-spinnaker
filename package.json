@@ -1,5 +1,5 @@
 {
-  "name": "mcp-server-spinnaker",
+  "name": "@airjesus17/mcp-server-spinnaker",
   "version": "1.0.0",
   "description": "MCP server implementation for Spinnaker integrations",
   "main": "dist/index.js",
