@@ -1,6 +1,15 @@
-# MCP Server Spinnaker
+# MCP Server for Spinnaker
 
-A Model Context Platform (MCP) server implementation for Spinnaker integrations.
+This package implements the Model Context Protocol (MCP) for Spinnaker integrations. It provides a server that allows AI assistants to interact with Spinnaker pipelines, deployments, and snapshots through a standardized interface.
+
+## Features
+
+- Full pipeline management (list, execute, pause, cancel)
+- Deployment history tracking
+- Snapshot management
+- Real-time pipeline execution monitoring via WebSocket
+- Smart context refresh based on activity levels
+- Comprehensive TypeScript type definitions
 
 ## Installation
 
@@ -12,68 +21,102 @@ yarn add @airjesus17/mcp-server-spinnaker
 
 ## Usage
 
+### Basic Setup
+
 ```typescript
-import { 
-  listApplications, 
-  listPipelines, 
-  executePipeline 
-} from '@airjesus17/mcp-server-spinnaker';
+import { ModelContextProtocolServer } from '@airjesus17/mcp-server-spinnaker';
 
-// Initialize Spinnaker configuration
-await initializeSpinnaker({
-  apiUrl: 'https://your-spinnaker-api.com',
-  token: 'your-token'
-});
+const server = new ModelContextProtocolServer(
+  'http://your-gate-url:8084',
+  ['your-app-1', 'your-app-2'],
+  ['prod', 'staging', 'dev']
+);
 
-// List applications
-const apps = await listApplications();
-
-// List pipelines for an application
-const pipelines = await listPipelines({ application: 'my-app' });
-
-// Execute a pipeline
-const execution = await executePipeline({
-  name: 'my-pipeline',
-  params: { version: '1.0.0' }
-});
+// Initialize the server
+await server.initialize();
 ```
+
+### Available Commands
+
+The server implements these core operations:
+
+#### Pipeline Operations
+- `list-pipelines`: List all pipelines for an application
+- `get-pipeline`: Get details of a specific pipeline
+- `execute-pipeline`: Start a pipeline execution
+- `pause-pipeline`: Pause a running pipeline
+- `cancel-pipeline`: Cancel a pipeline execution
+- `get-pipeline-execution`: Get detailed execution status
+
+#### Deploy History Operations
+- `list-deploys`: List deployment history with optional filters
+- `get-last-deploy`: Get most recent deployment for an app/environment
+
+#### Snapshot Operations
+- `list-snapshots`: List all snapshots for an application
+- `get-snapshot`: Get specific snapshot details
+- `deploy-snapshot`: Start a pipeline using a snapshot
+
+### Command Examples
+
+```typescript
+// List pipelines
+{
+  command: 'list-pipelines',
+  args: { application: 'my-app' }
+}
+
+// Execute pipeline
+{
+  command: 'execute-pipeline',
+  args: {
+    application: 'my-app',
+    pipelineId: 'deploy-prod',
+    params: { version: '1.2.3' }
+  }
+}
+
+// Get deployment history
+{
+  command: 'list-deploys',
+  args: {
+    application: 'my-app',
+    environment: 'prod',
+    sha: 'abc123',
+    branch: 'main'
+  }
+}
+```
+
+### Context Updates
+
+The server maintains context about:
+- Active pipeline executions
+- Recent deployments by environment
+- Active snapshots by application
+
+Context is automatically refreshed based on activity:
+- Every 30 seconds when there are active operations
+- Every 5 minutes during idle periods
 
 ## Development
 
-1. Install dependencies:
-```bash
-yarn install
-```
-
-2. Build the project:
+### Building
 ```bash
 yarn build
 ```
 
-3. Start the server:
+### Testing
 ```bash
-yarn start
+yarn test
+yarn test:coverage
 ```
 
-## Project Structure
-
+### Publishing
+```bash
+yarn publish
 ```
-src/
-  ├── commands/        # Command implementations
-  ├── schemas/         # Zod schemas for validation
-  ├── types/          # TypeScript type definitions
-  └── utils/          # Utility functions
-```
-
-## Features
-
-- Pipeline Management (list, execute, stop, monitor)
-- Application Management (list, details)
-- Deployment Management (list, status)
-- Schema validation for all inputs/outputs
-- TypeScript support
-- ES Module support
 
 ## License
 
-MIT License
+MIT

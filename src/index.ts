@@ -1,26 +1,8 @@
-// Application commands
-export { listApplications, getApplication } from './commands/application';
+export { ModelContextProtocolServer } from './handlers/ModelContextProtocolServer';
+export { CommandHandler } from './handlers/CommandHandler';
+export { ContextManager } from './handlers/ContextManager';
+export { GateClient } from './clients/GateClient';
 
-// Deployment commands
-export { listDeployments } from './commands/deployment';
-
-// Pipeline commands
-export {
-  listPipelines,
-  executePipeline,
-  stopPipeline,
-  watchPipeline,
-  spm_deploy
-} from './commands/pipeline';
-
-// Core functions
-export { initializeSpinnaker } from './functions';
-
-// Types
-export type {
-  SpinnakerApplication,
-  SpinnakerDeployment,
-  SpinnakerPipeline,
-  PipelineParameters,
-  SpinnakerConfig
-} from './types/spinnaker';
+// Export types
+export * from './types/protocol';
+export * from './types/spinnaker';
