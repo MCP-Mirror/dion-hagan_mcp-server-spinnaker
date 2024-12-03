@@ -1,6 +1,6 @@
 {
   "name": "@airjesus17/mcp-server-spinnaker",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "MCP server implementation for Spinnaker integrations",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,7 +20,9 @@
     "clean": "rm -rf dist",
     "prepublishOnly": "yarn clean && yarn build",
     "prepare": "yarn build",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "keywords": [
     "mcp",

@@ -1,8 +1,26 @@
 import { Pipeline, PipelineExecution, DeployHistory, Snapshot } from '../types/spinnaker';
+export interface Application {
+    name: string;
+    description: string;
+    pipelines: Pipeline[];
+}
+export interface Deployment {
+    application: string;
+    environment: string;
+    version: string;
+    status: string;
+    lastUpdated: string;
+}
 export declare class GateClient {
     private ws;
     private baseUrl;
     constructor(baseUrl: string);
+    getApplications(applications: string[]): Promise<Application[]>;
+    getDeployments(applications: string[], environments: string[]): Promise<Deployment[]>;
+    getPipelines(application: string): Promise<Pipeline[]>;
+    triggerPipeline(application: string, pipelineId: string, parameters?: Record<string, unknown>): Promise<{
+        ref: string;
+    }>;
     listPipelines(application: string): Promise<Pipeline[]>;
     getPipeline(application: string, pipelineId: string): Promise<Pipeline>;
     executePipeline(application: string, pipelineId: string, params?: Record<string, any>): Promise<string>;

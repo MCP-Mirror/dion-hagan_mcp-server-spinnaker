@@ -4,7 +4,46 @@ export class GateClient {
         this.ws = null;
         this.baseUrl = baseUrl;
     }
-    // Pipeline Operations
+    // New methods for MCP server
+    async getApplications(applications) {
+        const appPromises = applications.map(async (appName) => {
+            const pipelines = await this.listPipelines(appName);
+            const response = await fetch(`${this.baseUrl}/applications/${appName}`);
+            const appDetails = await response.json();
+            return {
+                name: appName,
+                description: appDetails.description || '',
+                pipelines
+            };
+        });
+        return Promise.all(appPromises);
+    }
+    async getDeployments(applications, environments) {
+        const deployments = [];
+        for (const app of applications) {
+            for (const env of environments) {
+                const lastDeploy = await this.getLastDeploy(env, app);
+                if (lastDeploy) {
+                    deployments.push({
+                        application: app,
+                        environment: env,
+                        version: lastDeploy.version,
+                        status: lastDeploy.status,
+                        lastUpdated: lastDeploy.timestamp
+                    });
+                }
+            }
+        }
+        return deployments;
+    }
+    async getPipelines(application) {
+        return this.listPipelines(application);
+    }
+    async triggerPipeline(application, pipelineId, parameters) {
+        const ref = await this.executePipeline(application, pipelineId, parameters);
+        return { ref };
+    }
+    // Existing methods
     async listPipelines(application) {
         const response = await fetch(`${this.baseUrl}/applications/${application}/pipelines`);
         return response.json();
