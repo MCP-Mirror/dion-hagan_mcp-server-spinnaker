@@ -1,5 +1,4 @@
-import { ParsedCommand } from '../types/protocol';
-
+import { ParsedCommand } from '../types/protocol.js';
 interface CommandPattern {
   patterns: RegExp[];
   parse: (matches: RegExpMatchArray) => ParsedCommand;

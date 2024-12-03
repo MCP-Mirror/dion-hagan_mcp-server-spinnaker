@@ -8,7 +8,7 @@ import {
   DeployStatus,
   Snapshot,
   SnapshotStatus
-} from './spinnaker';
+} from './spinnaker.js';
 
 /**
  * Response from the /mcp/v1/context endpoint containing current Spinnaker state

@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
-import { ContextResponse, SetContextRequest } from '../types/protocol';
-import { ContextManager } from './ContextManager';
-import { CommandHandler } from './CommandHandler';
-import { GateClient } from '../clients/GateClient';
-
-export class ModelContextProtocolServer {
+import { ContextResponse, SetContextRequest } from '../types/protocol.js';
+import { ContextManager } from './ContextManager.js';
+import { CommandHandler } from './CommandHandler.js';
+import { GateClient } from '../clients/GateClient.js';export class ModelContextProtocolServer {
   private contextManager: ContextManager;
   private commandHandler: CommandHandler;
 

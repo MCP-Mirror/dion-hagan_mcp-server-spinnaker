@@ -1,8 +1,6 @@
-import { GateClient } from '../clients/GateClient';
-import { CommandRequest, CommandResponse } from '../types/protocol';
-
-export class CommandHandler {
-  constructor(private gateClient: GateClient) {}
+import { GateClient } from '../clients/GateClient.js';
+import { CommandRequest, CommandResponse } from '../types/protocol.js';
+export class CommandHandler {  constructor(private gateClient: GateClient) {}
 
   async handleCommand(req: CommandRequest): Promise<CommandResponse> {
     try {

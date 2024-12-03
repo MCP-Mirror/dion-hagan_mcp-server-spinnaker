@@ -1,16 +1,45 @@
+interface CommandResult {
+  success: boolean;
+  data?: any;
+  error?: string;
+}  
 
-import { BaseServer, CommandResult, Tool } from '@modelcontextprotocol/sdk';
-import { GateClient } from '../clients/GateClient';
-import type { Application, Deployment } from '../clients/GateClient';
+interface Tool {
+  name: string;
+  description: string;
+  parameters: {
+    type: string;
+    properties: Record<string, any>;
+    required: string[];
+  };
+}
+
+class BaseServer {
+  protected registerTools(tools: any[]): void {
+    // Base implementation
+  }
+}
+import { GateClient } from '../clients/GateClient.js';
+import type { Application, Deployment } from '../clients/GateClient.js';
 
 interface SpinnakerContext {
   applications: Application[];
   deployments: Deployment[];
 }
 
+interface Command {
+  name: string;
+  parameters: unknown;
+}
+
 export class SpinnakerMCPServer extends BaseServer {
+  private logger: Console;
+  protected port: number;
+
   constructor(private gateClient: GateClient, private applications: string[], private environments: string[]) {
     super();
+    this.logger = console;
+    this.port = 3000;
     this.registerTools();
   }
 
@@ -72,12 +101,15 @@ export class SpinnakerMCPServer extends BaseServer {
     ];
   }
 
-  private registerTools(): void {
-    this.getTools().forEach(tool => {
-      this.registerTool(tool.name, tool.parameters, async (params: unknown) => {
-        return this.executeCommand({ name: tool.name, parameters: params });  
-      });
-    });
+  protected registerTools(): void {
+    const tools = this.getTools().map(tool => ({
+      name: tool.name,
+      parameters: tool.parameters,
+      handler: async (params: unknown) => {
+        return this.executeCommand({ name: tool.name, parameters: params });
+      }
+    }));
+    super.registerTools(tools);
   }
 
   async getContext(): Promise<SpinnakerContext> {

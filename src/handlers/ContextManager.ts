@@ -1,5 +1,5 @@
-import { GateClient } from '../clients/GateClient';
-import { Pipeline, PipelineExecution, DeployHistory, Snapshot } from '../types/spinnaker';
+import { GateClient } from '../clients/GateClient.js';
+import { Pipeline, PipelineExecution, DeployHistory, Snapshot } from '../types/spinnaker.js';
 
 interface SpinnakerContext {
   activePipelines: {

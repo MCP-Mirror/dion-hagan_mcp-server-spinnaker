@@ -1,5 +1,5 @@
 import WebSocket from 'ws';
-import { Pipeline, PipelineExecution, DeployHistory, Snapshot } from '../types/spinnaker';
+import { Pipeline, PipelineExecution, DeployHistory, Snapshot } from '../types/spinnaker.js';
 
 export interface Application {
   name: string;
